@@ -24,14 +24,14 @@ try {
         break;
         case 'delete':
             // delete PR
-            const pulls = await octokit.rest.pulls.list({
+            const pulls = octokit.rest.pulls.list({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 state: 'open',
                 head: `${user}:main`
             });
             if (pulls.data.length > 0) {
-                await octokit.rest.pulls.update({
+                octokit.rest.pulls.update({
                     owner: github.context.repo.owner,
                     repo: github.context.repo.repo,
                     pull_number: pulls.data[0].number,

@@ -44,7 +44,6 @@ jobs:
       - name: debug
         run: echo ${{steps.check_command.outputs.command}}
 
-
       # QUEST SECTION
       - name: install dependencies
         run: npm install --prefix src/
