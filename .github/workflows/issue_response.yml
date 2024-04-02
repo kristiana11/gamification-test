@@ -46,7 +46,8 @@ jobs:
 
       # QUEST SECTION
       - name: install dependencies
-        run: npm install --prefix src/
+        run: npm install @actions/github
+
       - name: Create task 1 - find issue section
         if: steps.check_command.outputs.quest == 'Q1'
         uses: ./.github/actions/issue_manager

@@ -1,5 +1,5 @@
 // main code for managing PRs. main functions are create and delete
-import github from '@actions/github';
+const github = require('@actions/github');
 
 
 try {
