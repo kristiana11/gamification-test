@@ -12,7 +12,7 @@ try {
     switch (action) {
         case 'create':
             // create PR
-            const response = await octokit.rest.pulls.create({
+            const response = octokit.rest.pulls.create({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 title: description,

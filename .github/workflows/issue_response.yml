@@ -1,4 +1,4 @@
-name: Update README from Issue Comment
+name: issue responder
 
 on:
   issue_comment:
