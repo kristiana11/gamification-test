@@ -1,0 +1,150 @@
+name: Update README from Issue Comment
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  update_readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2  # Check out the repository's code
+
+      # GET COMMAND
+      - name: Check if Command is Issued
+        id: check_command
+        # prepare for regular expressions ): (sorry)
+        run: |
+          comment="${{ github.event.comment.body }}"
+          if [[ "$comment" =~ ^/ ]]; then
+            command=$(echo "$comment" | cut -d' ' -f1)
+            if [[ "$command" =~ ^/(new|accept|drop|display|check)(\s.*)?$ ]]; then
+              echo "::set-output name=command::quest-command"
+              args=$(echo "$comment" | cut -d' ' -f2-)
+              if [[ "$command" == "/accept" ]]; then
+                if [[ "$args" == "Q1" ]]; then
+                  echo "::set-output name=quest::Q1"
+                elif [[ "$args" == "Q2" ]]; then
+                  echo "::set-output name=quest::Q2"
+                elif [[ "$args" == "Q3" ]]; then
+                  echo "::set-output name=quest::Q3"
+                fi
+              fi
+            elif [[ "$command" =~ ^/update-readme ]]; then
+              echo "::set-output name=command::update-readme"
+            else
+              echo "::set-output name=command::unknown"
+            fi
+          else
+            echo "::set-output name=command::non-command"
+          fi
+
+      - name: debug
+        run: echo ${{steps.check_command.outputs.command}}
+
+
+      # QUEST SECTION
+      - name: install dependencies
+        run: npm install --prefix src/
+      - name: Create task 1 - find issue section
+        if: steps.check_command.outputs.quest == 'Q1'
+        uses: ../.github/actions/issue_manager
+        with:
+          action: 'create'
+          user: ${{ github.event.comment.user.login }}
+          description: 'Youve found the issue section! answer 32 below to complete task'
+      - name: Creating new file for PR
+        if: steps.check_command.outputs.quest == 'Q1'
+        run: |
+          echo "test" > test.txt
+          git config --global user.name 'README_BOT'
+          git config --global user.email 'connor.nicolai.aiton@gmail.com'
+          git add test.txt
+          git commit -m "Adding new test.txt file"
+      - name: Create task 2 - find PR
+        uses: ./.github/actions/PR_manager
+        with:
+          action: 'create'
+          user: ${{ github.event.comment.user.login }}
+          description: 'You have found a Pull Request! answer 41 below to complete the task'
+      - name: Create task 3 - find fork button
+        if: steps.check_command.outputs.quest == 'Q1'
+        uses: ./.github/actions/issue_manager
+        with:
+          action: 'create'
+          user: ${{ github.event.comment.user.login }}
+          description: >
+            When you go to https://github.com/caiton1/gamification-demo
+            where is the fork button?
+            a) In the about section
+            b) In the hamburger menu on the top left
+            c) In the kitchen drawer 
+            d) Near the top right, on the right of the repo title
+            Respond with: (a,b,c or d)
+      - name: Create task 4 - find the readme file
+        if: steps.check_command.outputs.quest == 'Q1'
+        uses: ./.github/actions/readme_manager
+        with:
+          action: 'append'
+          user: ${{ github.event.comment.user.login }}
+          content: 'You found the README! answer 12 in an issue to complete the task.'
+          replace_pattern: ''
+      - name: Create task 5 - Find the contributors
+        if: steps.check_command.outputs.quest == 'Q1'
+        uses: ./.github/actions/issue_manager
+        with:
+          action: 'create'
+          user: ${{ github.event.comment.user.login }}
+          description: >
+            Please copy and past one of the names of the contributors below.
+
+
+
+      # README MANAGER TEST SECTION
+      - name: Call Manage README Workflow
+        if: steps.check_command.outputs.command == 'update-readme'
+        uses: ./.github/actions/readme_manager
+        with:
+          action: 'create'  # Assuming you want to create a new README file
+          user: ${{ github.event.comment.user.login }}
+          content:  ${{ github.event.comment.body }}
+          replace_pattern: ''
+
+      # SAVE CHANGES
+      - name: Commit Changes
+        if: steps.check_command.outputs.command == 'update-readme'
+        run: |
+          git config --global user.name 'README_BOT'
+          git config --global user.email 'connor.nicolai.aiton@gmail.com'
+          git add README.md
+          git commit -m "Update README via GitHub Actions"
+          git push
+
+      # INSTALL REQUIRNMENTS
+      - name: Install dependencies
+        if: steps.check_command.outputs.command != 'non-command'
+        run: |
+          pip install -r src/requirements.txt
+      # QUEST TEST SECTION
+      - name: Use response bot to manage quests
+        if: steps.check_command.outputs.command == 'quest-command'
+        run: |
+          python src/Response.py ${{ github.repository }} ${{github.event.issue.number}} ${{github.event.comment.body}}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN}}
+          MONGODB_URI: ${{ secrets.MONGODB_URI}}
+
+      # INCORRECT COMMAND
+      - name: Incorrect Command
+        if: steps.check_command.outputs.command == 'unknown'
+        run: |
+          echo ${{github.event.comment.body}}
+          python src/Response.py ${{ github.repository }} ${{github.event.issue.number}} ${{github.event.comment.body}}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN}}
+          MONGODB_URI: ${{ secrets.MONGODB_URI}}
+
+
+

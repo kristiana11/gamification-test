@@ -1,0 +1,16 @@
+name: 'Manage Pull Requests'
+description: 'Manages pull requests - create or delete'
+author: 'caiton1'
+inputs:
+  action:
+    description: 'Action to perform (create or delete)'
+    required: true
+  user:
+    description: 'User performing the action'
+    required: true
+  description:
+    description: 'Description of the pull request'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'

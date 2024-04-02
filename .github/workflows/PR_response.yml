@@ -1,0 +1,40 @@
+# TODO: need to refactor to respond to Pull requests
+name: Pull Request Response
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  check_pull_requests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Display directory
+      run: |
+        pwd
+        ls -a
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Check for if quest is accepted
+      id: check_accepted
+      run: python src/Quests.py ${{ github.repository_owner }} check first_PR
+      env:
+        MONGODB_URI: ${{ secrets.MONGODB_URI}}
+        GH_TOKEN: ${{ secrets.GH_TOKEN}}
+
+    - name: Run pull request checker
+      if: steps.check_quest.outcome == 'success'
+      run: python src/PRChecker.py
+      env:
+        MONGODB_URI: ${{ secrets.MONGODB_URI}}
+        GH_TOKEN: ${{ secrets.GH_TOKEN}}

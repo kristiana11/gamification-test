@@ -1,0 +1,16 @@
+name: 'Manage issues'
+description: 'Manages issues requests - create or delete'
+author: ''
+inputs:
+  action:
+    description: 'Action to perform (create or delete)'
+    required: true
+  user:
+    description: 'User performing the action'
+    required: true
+  description:
+    description: 'Description of the issue'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'

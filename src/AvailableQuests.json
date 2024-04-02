@@ -1,0 +1,32 @@
+{
+  "Q1": {
+    "metadata":{
+      "title": "Exploring the GitHub World",
+      "prerequisite": null
+    },
+    "Find the issue tracker":{"points": 20},
+    "Find the pull-request menu":{"points": 20},
+    "Find the fork button": {"points": 20},
+    "Find the readme file": {"points": 20},
+    "Find the contributors": {"points": 20}
+  },
+  "Q2": {
+    "metadata":{
+      "title": "Introducing yourself to the community",
+      "prerequisite": "Q1"
+    },
+    "Choose an issue that you would like to work with": {"points": 20},
+    "Post a comment in the issue introducing yourself": {"points": 20},
+    "Mention a contributor": {"points": 20}
+  },
+  "Q3": {
+    "metadata":{
+      "title": "Making your first contribution",
+      "prerequisite": "Q2"
+    },
+    "Solve the issue (upload a file/make commit)": {"points": 20},
+    "Submit a pull request": {"points": 20},
+    "Post in issue asking for a review": {"points": 20},
+    "Close the issue":{"points": 20}
+  }
+}

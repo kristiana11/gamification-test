@@ -1,0 +1,7 @@
+{
+  "name": "issue_manager",
+  "version": "1.0.0",
+  "dependencies": {
+    "@actions/github": "^4.0.0"
+  }
+}
