@@ -50,7 +50,7 @@ jobs:
         run: npm install --prefix src/
       - name: Create task 1 - find issue section
         if: steps.check_command.outputs.quest == 'Q1'
-        uses: ../.github/actions/issue_manager
+        uses: ./.github/actions/issue_manager
         with:
           action: 'create'
           user: ${{ github.event.comment.user.login }}
