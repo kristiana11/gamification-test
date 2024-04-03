@@ -7,7 +7,7 @@ try {
     const description = process.env.INPUT_DESCRIPTION;
 
     //const octokit = github.getOctokit(process.env.GH_TOKEN);
-    const octokit = new octokit({
+    const octokit = new Octokit({
       auth: process.env.GH_TOKEN
     })
 
