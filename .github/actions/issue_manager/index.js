@@ -3,7 +3,7 @@ const github = require('@actions/github');
 try {
     const action = process.env.INPUT_ACTION;
     const user = process.env.INPUT_USER;
-    cont title = process.env.INPUT_TITLE;
+    const title = process.env.INPUT_TITLE;
     const description = process.env.INPUT_DESCRIPTION;
 
     // Look at how to use octokit to make API calls that will create an issue
