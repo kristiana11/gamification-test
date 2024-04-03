@@ -55,6 +55,8 @@ jobs:
           action: 'create'
           user: ${{ github.event.comment.user.login }}
           description: 'Youve found the issue section! answer 32 below to complete task'
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN}}
       - name: Creating new file for PR
         if: steps.check_command.outputs.quest == 'Q1'
         run: |
@@ -69,6 +71,8 @@ jobs:
           action: 'create'
           user: ${{ github.event.comment.user.login }}
           description: 'You have found a Pull Request! answer 41 below to complete the task'
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN}}
       - name: Create task 3 - find fork button
         if: steps.check_command.outputs.quest == 'Q1'
         uses: ./.github/actions/issue_manager
@@ -83,6 +87,8 @@ jobs:
             c) In the kitchen drawer 
             d) Near the top right, on the right of the repo title
             Respond with: (a,b,c or d)
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN}}
       - name: Create task 4 - find the readme file
         if: steps.check_command.outputs.quest == 'Q1'
         uses: ./.github/actions/readme_manager
@@ -99,6 +105,8 @@ jobs:
           user: ${{ github.event.comment.user.login }}
           description: >
             Please copy and past one of the names of the contributors below.
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN}}
 
 
 

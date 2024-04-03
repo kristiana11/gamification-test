@@ -6,7 +6,7 @@ try {
     const description = process.env.INPUT_DESCRIPTION;
 
     // Look at how to use octokit to make API calls that will create an issue
-    const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+    const octokit = github.getOctokit(process.env.GH_TOKEN);
     const { owner, repo } = github.context.repo;
 
     switch (action) {

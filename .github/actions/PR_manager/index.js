@@ -7,7 +7,7 @@ try {
     const user = process.env.INPUT_USER;
     const description = process.env.INPUT_DESCRIPTION;
 
-    const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+    const octokit = github.getOctokit(process.env.GH_TOKEN);
 
     switch (action) {
         case 'create':
