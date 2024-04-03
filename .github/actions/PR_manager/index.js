@@ -15,7 +15,8 @@ try {
     switch (action) {
         case 'create':
             // create PR
-            octokit.request('POST /repos/${github.context.repo.owner}/${github.context.repo.repo}/pulls', {
+            // TODO: add {repo}
+            octokit.request('POST /repos/{user}/{gamification-test}/pulls', {
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 title: description,
