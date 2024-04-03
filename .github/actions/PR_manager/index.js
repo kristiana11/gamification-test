@@ -1,4 +1,5 @@
 // main code for managing PRs. main functions are create and delete
+    const github = require('@actions/github');
     const { Octokit } = require("@octokit/rest");
 
 try {
