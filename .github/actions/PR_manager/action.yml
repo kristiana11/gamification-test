@@ -12,5 +12,5 @@ inputs:
     description: 'Description of the pull request'
     required: true
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'index.js'

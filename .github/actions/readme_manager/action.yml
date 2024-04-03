@@ -15,5 +15,5 @@ inputs:
     description: 'Pattern to replace in README.'
     required: false
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'index.js'
