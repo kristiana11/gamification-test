@@ -60,18 +60,6 @@ jobs:
           description: answer 32 below to complete task
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          
-      - name: Creating new file for PR
-        if: steps.check_command.outputs.quest == 'Q1'
-        run: |
-          git checkout -b test
-          echo "test" > test.txt
-          git config --global user.name 'README_BOT'
-          git config --global user.email 'connor.nicolai.aiton@gmail.com'
-          git add test.txt
-          git commit -m "Adding new test.txt file"
-          git push https://github.com/caiton1/gamification-test.git HEAD:test --follow-tags --tags -u ${{ secrets.GH_TOKEN }}
-
       - name: Create task 2 - find PR
         uses: ./.github/actions/PR_manager
         with:
