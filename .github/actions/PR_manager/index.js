@@ -7,7 +7,10 @@ try {
     const user = process.env.INPUT_USER;
     const description = process.env.INPUT_DESCRIPTION;
 
-    const octokit = github.getOctokit(process.env.GH_TOKEN);
+    //const octokit = github.getOctokit(process.env.GH_TOKEN);
+    const octokit = new Octokit({
+        auth: process.env.GH_TOKEN
+    })
 
     switch (action) {
         case 'create':
@@ -20,6 +23,16 @@ try {
                 base: 'main',
                 body: description
             });
+
+            await octokit.request('POST /repos/${github.context.repo.owner}/${github.context.repo.repo}/pulls', {
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                title: description,
+                body: description,
+                head: user,
+                base: {'X-GitHub-Api-Version': '2022-11-28'}
+
+            })
             console.log('Pull request created:', response.data.html_url);
         break;
         case 'delete':
