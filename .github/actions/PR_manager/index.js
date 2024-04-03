@@ -15,7 +15,7 @@ try {
     switch (action) {
         case 'create':
             // create PR
-            await octokit.request('POST /repos/${github.context.repo.owner}/${github.context.repo.repo}/pulls', {
+            octokit.request('POST /repos/${github.context.repo.owner}/${github.context.repo.repo}/pulls', {
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 title: description,
