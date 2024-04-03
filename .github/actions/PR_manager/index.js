@@ -16,16 +16,18 @@ try {
         case 'create':
             // create PR
             // TODO: add {repo}
-            octokit.request('POST /repos/{user}/{gamification-test}/pulls', {
+            octokit.rest.pulls.create({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 title: description,
                 body: description,
                 head: 'test',
-                base: 'main',
-                headers: {'X-GitHub-Api-Version': '2022-11-28'}
-            })
-            console.log('Pull request created');
+                base: 'main'
+            }).then(response => {
+                console.log('Pull request created:', response.data.html_url);
+            }).catch(error => {
+                console.log('Error creating pull request:', error.message);
+            });
         break;
         case 'delete':
             // delete PR
