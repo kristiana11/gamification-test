@@ -12,24 +12,17 @@ try {
     switch (action) {
         case 'create':
             // create PR
-            const response = octokit.rest.pulls.create({
-                owner: github.context.repo.owner,
-                repo: github.context.repo.repo,
-                title: description,
-                head: user,
-                base: 'main',
-                body: description
-            });
-
             octokit.request('POST /repos/${github.context.repo.owner}/${github.context.repo.repo}/pulls', {
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 title: description,
                 body: description,
                 head: user,
-                base: {'X-GitHub-Api-Version': '2022-11-28'}
+                base: 'main',
+                headers: {'X-GitHub-Api-Version': '2022-11-28'}
 
             })
+
             console.log('Pull request created:', response.data.html_url);
         break;
         case 'delete':
