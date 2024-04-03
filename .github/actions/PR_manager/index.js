@@ -20,7 +20,7 @@ try {
                 repo: github.context.repo.repo,
                 title: description,
                 body: description,
-                head: user,
+                head: 'test',
                 base: 'main',
                 headers: {'X-GitHub-Api-Version': '2022-11-28'}
             })

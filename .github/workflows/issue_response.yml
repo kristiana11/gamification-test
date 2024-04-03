@@ -60,6 +60,9 @@ jobs:
           description: answer 32 below to complete task
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN}}
+      - name: create new branch
+        run: git checkout -b test
+
       - name: Creating new file for PR
         if: steps.check_command.outputs.quest == 'Q1'
         run: |
@@ -68,6 +71,8 @@ jobs:
           git config --global user.email 'connor.nicolai.aiton@gmail.com'
           git add test.txt
           git commit -m "Adding new test.txt file"
+          git push -u origin test
+
       - name: Create task 2 - find PR
         uses: ./.github/actions/PR_manager
         with:
