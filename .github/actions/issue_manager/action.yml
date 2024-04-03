@@ -8,9 +8,12 @@ inputs:
   user:
     description: 'User performing the action'
     required: true
+  title:
+    description: 'what to put inside of the issue description'
+    required: false
   description:
     description: 'Description of the issue'
-    required: true
+    required: false
 runs:
   using: 'node12'
   main: 'index.js'

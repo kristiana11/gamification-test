@@ -54,7 +54,8 @@ jobs:
         with:
           action: 'create'
           user: ${{ github.event.comment.user.login }}
-          description: 'Youve found the issue section! answer 32 below to complete task'
+          title: 'You have found the issue section!'
+          description: answer 32 below to complete task
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN}}
       - name: Creating new file for PR
@@ -79,14 +80,15 @@ jobs:
         with:
           action: 'create'
           user: ${{ github.event.comment.user.login }}
+          title: find the fork button
           description: >
-            When you go to https://github.com/caiton1/gamification-demo
-            where is the fork button?
-            a) In the about section
-            b) In the hamburger menu on the top left
-            c) In the kitchen drawer 
-            d) Near the top right, on the right of the repo title
-            Respond with: (a,b,c or d)
+            When you go to https://github.com/caiton1/gamification-demo \n
+            where is the fork button? \n
+            a) In the about section \n
+            b) In the hamburger menu on the top left \n
+            c) In the kitchen drawer \n
+            d) Near the top right, on the right of the repo title \n
+            Respond with: (a,b,c or d) \n
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN}}
       - name: Create task 4 - find the readme file
@@ -103,6 +105,7 @@ jobs:
         with:
           action: 'create'
           user: ${{ github.event.comment.user.login }}
+          title: Find the contributor
           description: >
             Please copy and past one of the names of the contributors below.
         env:
