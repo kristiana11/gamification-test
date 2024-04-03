@@ -67,7 +67,7 @@ jobs:
         if: steps.check_command.outputs.quest == 'Q1'
         run: |
           echo "test" > test.txt
-          git config --global user.name 'README_BOT'
+          git config --global user.name 'caiton1'
           git config --global user.email 'connor.nicolai.aiton@gmail.com'
           git add test.txt
           git commit -m "Adding new test.txt file"
