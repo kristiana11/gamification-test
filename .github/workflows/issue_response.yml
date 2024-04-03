@@ -59,7 +59,7 @@ jobs:
           title: 'You have found the issue section!'
           description: answer 32 below to complete task
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN}}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: create new branch
         run: git checkout -b test
 
@@ -67,11 +67,11 @@ jobs:
         if: steps.check_command.outputs.quest == 'Q1'
         run: |
           echo "test" > test.txt
-          git config --global user.name 'caiton1'
+          git config --global user.name 'README_BOT'
           git config --global user.email 'connor.nicolai.aiton@gmail.com'
           git add test.txt
           git commit -m "Adding new test.txt file"
-          git push -u origin test
+          git push https://github.com/caiton1/gamification-test.git HEAD:test --follow-tags --tags -u ${{ secrets.GH_TOKEN }}
 
       - name: Create task 2 - find PR
         uses: ./.github/actions/PR_manager
