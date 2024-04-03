@@ -25,7 +25,7 @@ try {
                 base: 'main',
                 headers: {'X-GitHub-Api-Version': '2022-11-28'}
             })
-            console.log('Pull request created:', response.data.html_url);
+            console.log('Pull request created');
         break;
         case 'delete':
             // delete PR
