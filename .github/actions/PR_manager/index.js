@@ -1,6 +1,5 @@
 // main code for managing PRs. main functions are create and delete
-const github = require('@actions/github');
-
+    const { Octokit } = require("@octokit/rest");
 
 try {
     const action = process.env.INPUT_ACTION;
@@ -8,7 +7,7 @@ try {
     const description = process.env.INPUT_DESCRIPTION;
 
     //const octokit = github.getOctokit(process.env.GH_TOKEN);
-    const octokit = new Octokit({
+    const octokit = new octokit({
       auth: process.env.GH_TOKEN
     })
 

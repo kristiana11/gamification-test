@@ -46,7 +46,9 @@ jobs:
 
       # QUEST SECTION
       - name: install dependencies
-        run: npm install @actions/github
+        run: |
+          npm install @actions/github
+          npm install @octokit/rest
 
       - name: Create task 1 - find issue section
         if: steps.check_command.outputs.quest == 'Q1'
