@@ -8,5 +8,5 @@ Testing User Card Stats Here:<br>
 ![User Draft Stats](/userCards/draft.svg)
 
 Quests Map:
-![Quest Map](/photos/QuestsMap.png)
+![Quest Map](/photo/QuestMap.png)
 
