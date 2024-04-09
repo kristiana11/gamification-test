@@ -9,3 +9,4 @@ Testing User Card Stats Here:<br>
 
 Quests Map:
 ![Quest Map](/photos/QuestsMap.png)
+
